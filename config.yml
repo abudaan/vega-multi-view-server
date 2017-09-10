@@ -1,0 +1,4 @@
+debug: true
+element: app
+dataPath: ../assets/data
+# cssClass: view
