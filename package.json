@@ -6,7 +6,8 @@
     "author": "abudaan",
     "scripts": {
         "watch": "watchify ./assets/src/js/app.js -t [ babelify ] -o ./assets/app.bundle.js --debug --verbose",
-        "start": "npm run server & npm run watch",
+        "startw": "npm run server & npm run watch",
+        "start": "npm run server",
         "server": "php -S localhost:5005"
     },
     "dependencies": {
