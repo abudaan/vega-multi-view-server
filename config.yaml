@@ -1,4 +1,5 @@
 debug: true
 element: app
 dataPath: ../assets/data
-# cssClass: view
+imagePath: ../assets/img
+#cssClass: view

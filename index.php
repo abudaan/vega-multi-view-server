@@ -14,7 +14,7 @@ $twig = new Twig_Environment($loader, array(
 use Symfony\Component\Yaml\Parser;
 
 $yaml = new Parser();
-$config = $yaml->parse(file_get_contents(__DIR__.'/config.yml'));
+$config = $yaml->parse(file_get_contents(__DIR__.'/config.yaml'));
 
 $app = new Silex\Application();
 
@@ -27,12 +27,13 @@ $app->get('/{views}', function ($views) use ($app, $twig, $yaml, $config) {
 
     foreach($ids as $id){
         if($id != '') {
-            $spec = file_get_contents(__DIR__.'/specs/spec'.$id.'.yml');
+            $spec = file_get_contents(__DIR__.'/specs/spec'.$id.'.yaml');
             if ($spec != null) {
-                $spec = str_replace('$DATA_PATH', $config['dataPath'], $spec);
+                $spec = str_replace('$_DATA_PATH', $config['dataPath'], $spec);
+                $spec = str_replace('$_IMAGE_PATH', $config['imagePath'], $spec);
                 $specs[] = $yaml->parse($spec);
                 // $specs[] = $spec;
-                $runtime = file_get_contents(__DIR__.'/specs/runtime'.$id.'.yml');
+                $runtime = file_get_contents(__DIR__.'/specs/runtime'.$id.'.yaml');
                 if ($runtime !== null) {
                     $runtimes[] = $yaml->parse($runtime);
                     // $runtimes[] = $runtime;
