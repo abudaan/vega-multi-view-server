@@ -1,5 +1,5 @@
 subscribe:
-    signal: range
+    signal: range2
     as: detailDomain
 tooltipOptions:
     showAllFields: false

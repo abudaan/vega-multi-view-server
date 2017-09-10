@@ -15,17 +15,6 @@ import babelify from 'babelify';
 import es from 'event-stream';
 import glob from 'glob';
 import path from 'path';
-import createSpecs from './scripts/create-specs';
-
-const sources = {
-    js: './src/js/**/*.js',
-    main_js: './src/js/index.js',
-};
-
-const targets = {
-    // js: './public/js/app2.js',
-    js: './public/js/',
-};
 
 const logBrowserifyError = (e) => {
     gutil.log(gutil.colors.red(e.message));
@@ -42,73 +31,19 @@ const rebundle = (b, target) => b.bundle()
     .on('error', logBrowserifyError)
     .pipe(source('app.bundle.js'))
     .pipe(buffer())
-    .pipe(gulp.dest(target));
-
-
-gulp.task('build_all', (done) => {
-    glob('./experiments/**/app.js', (err, files) => {
-        if (err) {
-            done(err);
-        }
-        const tasks = files.map((file) => {
-            gutil.log(gutil.colors.blue('building', file));
-            const b = browserify({ entries: file, debug: true });
-            b.transform(babelify.configure({
-                compact: true,
-            }));
-
-            return b.bundle()
-                .pipe(source(file))
-                .pipe(rename({
-                    extname: '.bundle.js',
-                }))
-                // .pipe(minify({
-                //     mangle: {
-                //         keepClassName: true,
-                //     },
-                // }))
-                .pipe(gulp.dest('./'));
-        });
-        es.merge(tasks).on('end', done);
-    });
-});
-
-
-gulp.task('watch_all', (done) => {
-    const w = process.argv[4] || '**';
-    glob(`./experiments/${w}/app.js`, (err, files) => {
-        if (err) {
-            done(err);
-        }
-        const tasks = files.map((file) => {
-            gutil.log(gutil.colors.blue('watching', file));
-            const b = watchify(browserify({ entries: file, debug: true }));
-            const dir = path.dirname(file);
-            b.transform(babelify.configure({
-                compact: true,
-            }));
-            b.on('update', () => {
-                gutil.log(gutil.colors.blue('update js bundle', file));
-                rebundle(b, dir);
-            });
-            return rebundle(b, dir);
-        });
-        es.merge(tasks).on('end', done);
-    });
-});
+    .pipe(gulp.dest('./assets'));
 
 
 gulp.task('watch_js', () => {
     const opts = {
         debug: true,
-        paths: sources.js,
     };
 
     opts.cache = {};
     opts.packageCache = {};
 
     const b = watchify(browserify(opts));
-    b.add(sources.main_js);
+    b.add('./assets/src/js/app.js');
     b.transform(babelify.configure({
         compact: true,
     }));
@@ -123,12 +58,11 @@ gulp.task('watch_js', () => {
 
 
 gulp.task('build_js', () => {
-    const folder = process.argv[4] || '**';
     const opts = {
         debug: true,
     };
     const b = browserify(opts);
-    b.add(`./experiments/${folder}/app.js`);
+    b.add(`./assets/src/js/app.js`);
     b.transform(babelify.configure({
         compact: true,
     }));
@@ -141,25 +75,20 @@ gulp.task('build_js', () => {
             loadMaps: false,
         }))
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(`./experiments/${folder}`))
+        .pipe(gulp.dest(`./assets`))
         .pipe(filter('**/*.js'))
         .pipe(minify({
             mangle: {
                 keepClassName: true,
             },
         }))
-        .pipe(gulp.dest(`./experiments/${folder}`));
+        .pipe(gulp.dest('./assets'));
 });
 
 
-gulp.task('build_css', () => gulp.src('./css/main.sass')
+gulp.task('build_css', () => gulp.src('./asset/src/css/main.sass')
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer())
     .pipe(concat('app.css'))
-    .pipe(gulp.dest('./css')));
+    .pipe(gulp.dest('./assets')));
 
-
-gulp.task('create_specs', (done) => {
-    createSpecs(path.join(__dirname, 'specs'), path.join(__dirname, 'specs'))
-        .then(() => { done(); }, (error) => { gutil.log(gutil.colors.red(error)); done(); });
-});

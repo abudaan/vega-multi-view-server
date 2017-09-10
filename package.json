@@ -5,25 +5,17 @@
     "license": "MIT",
     "author": "abudaan",
     "scripts": {
-        "watch2": "watchify ./experiments/2/app.js -t [ babelify ] -o ./experiments/2/build/app.js --debug --verbose",
-        "start2": "npm run server & npm run watch2",
-        "silex": "php -S localhost:8080",
-        "server": "python -m SimpleHTTPServer 9001",
+        "watch": "watchify ./assets/src/js/app.js -t [ babelify ] -o ./assets/app.bundle.js --debug --verbose",
         "start": "npm run server & npm run watch",
-        "watch": "watchify ./src/js/index.js -t [ babelify ] -o ./public/js/app.js --debug --verbose",
-        "watch-css": "node-sass -w ./src/styles/main.sass > ./public/css/app.css",
-        "create-specs": "babel-node ./scripts/create-specs.js"
+        "server": "php -S localhost:5005"
     },
     "dependencies": {
-        "koa": "^2.3.0",
         "ramda": "0.23.0",
         "vega-multi-view": "https://github.com/abudaan/vega-multi-view"
     },
     "devDependencies": {
         "babel-cli": "^6.26.0",
         "babel-eslint": "^7.2.3",
-        "babel-plugin-dynamic-import-node": "^1.0.2",
-        "babel-plugin-syntax-dynamic-import": "^6.18.0",
         "babel-preset-env": "^1.6.0",
         "babel-preset-flow": "^6.23.0",
         "babel-preset-stage-0": "^6.24.1",
@@ -38,11 +30,9 @@
         "eslint-plugin-react": "6.10.0",
         "event-stream": "^3.3.4",
         "flow-bin": "0.42.0",
-        "glob": "^7.1.2",
         "gulp": "^3.9.1",
         "gulp-autoprefixer": "^4.0.0",
         "gulp-babel-minify": "^0.2.0",
-        "gulp-babili": "^0.1.4",
         "gulp-concat": "^2.6.1",
         "gulp-filter": "^5.0.1",
         "gulp-rename": "^1.2.2",
