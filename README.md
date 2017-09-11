@@ -12,6 +12,8 @@
             * [Publish and subscribe signals](#publish-and-subscribe-signals)
             * [Tooltips](#tooltips)
 
+<small>toc created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)</small>
+
 ## Introduction
 
 This project is a Silex server that serves pages with multiple separated Vega views. For rendering the views to the page I use [vega-multi-view](https://github.com/abudaan/vega-multi-view) which is a wrapper for the Vega runtime that allows separated Vega views to listen to each other's signals. Separated means that each spec is rendered in a separate HTML element.
