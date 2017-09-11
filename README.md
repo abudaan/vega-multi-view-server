@@ -2,6 +2,14 @@
 
 ## Table of Contents
 
+   * [Vega multi view server](#vega-multi-view-server)
+      * [Table of Contents](#table-of-contents)
+      * [Introduction](#introduction)
+      * [How it works](#how-it-works)
+         * [Step 1](#step-1)
+         * [Step 2](#step-2)
+         * [Step 3](#step-3)
+      * [Live example](#live-example)
 
 <small>toc created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)</small>
 
