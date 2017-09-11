@@ -28,13 +28,15 @@ The url is parsed into segments and each segment is interpreted as the id of a V
 ```javascript
 https://app4.bigdator.nl/6a/6b
 ```
-tells the server to load the Vega specs with id `6a` and `6b`. The order of the ids in the url is also the order of their appearance.
+tells the server to load the Vega specs with id `6a` and `6b`. The order of the ids in the url is also the order of their appearance on the page.
 
 ### Step 1
 
-The server first starts to look for a runtime configuration file that belongs the spec with the requested id. A runtime configuration may or may not define the spec it belongs to. If it does the server tries to find that spec and once the spec is found it will be coupled with the runtime.
+The server first starts to look for a runtime configuration file that belongs the spec with the requested id. If no file is found the server continues to the next requested id.
 
-If a spec is defined but it cannot be found, the server tries to find a spec with the requested id. If found it will be added with no coupled runtime.
+If a runtime file is found, the server looks for a `spec` entry. A runtime configuration may or may not define the spec it belongs to, if it does the server tries to find that spec and once the spec is found it will be coupled with the runtime.
+
+If a spec is defined but it cannot be found, the server tries to find a spec with the requested id. If found it will be added with no coupled runtime. Note that this doesn't mean that the spec has no runtime configuration; it can be inlined in the spec file as well.
 
 Coupling means that the server populates 2 arrays: `$specs` and `$runtimes` and a spec at slot 2 of the `$specs` array is coupled to the runtime at slot 2 in the `$runtimes` array. If a spec has no runtime, `null` will be stored at the corresponding slot in the `$runtimes` array.
 
@@ -73,18 +75,18 @@ data:
     encode:
       enter:
         url:
-          value: $_IMAGE_PATH/afval.png
+          value: $_IMAGE_PATH/litter.png
         x:
           field: x
         y:
           field: y
 ```
 
-The global configuration file that gets loaded as soon as the server starts, sets the data and image path parameters according the folder structure. This way it is very easy to reuse specs in different server environments. You could even replace the paths on the client if necessary though I think this is more a task for the server.
+The global configuration file that gets loaded as soon as the server starts, sets the data and image path parameters according the folder structure. This way it is very easy to reuse specs in different server environments. You could replace the paths on the client if necessary though I think this is more a task for the server.
 
 ### Step 3
 
-The server builds a `vega-multi-view` global runtime configuration for the client and encodes it to a JSON string. The server renders a twig template and the serialized config object is added as dataset of the body element:
+The server builds a `vega-multi-view` global runtime configuration for the client and encodes it to a JSON string. The server renders a twig template and the serialized config object is added as dataset to the body element:
 
 ```html
 <body data-vegamultiview='{"debug":true,"element":"app","dataPath":"\/assets\/data","imagePath":"\/assets\/img","specs ....}'>
