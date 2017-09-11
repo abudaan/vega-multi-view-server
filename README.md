@@ -11,7 +11,7 @@
          * [Step 3](#step-3)
       * [Live example](#live-example)
 
-<small>toc created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)</small>
+<small>(toc created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc))</small>
 
 ## Introduction
 
