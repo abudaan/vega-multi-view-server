@@ -3,6 +3,7 @@
 ## Table of Contents
 
    * [Vega multi view server](#vega-multi-view-server)
+      * [Table of Contents](#table-of-contents)
       * [Introduction](#introduction)
       * [How it works](#how-it-works)
          * [Step 1](#step-1)
