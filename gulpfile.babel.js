@@ -62,7 +62,7 @@ gulp.task('build_js', () => {
         debug: true,
     };
     const b = browserify(opts);
-    b.add(`./assets/src/js/app.js`);
+    b.add('./assets/src/js/app.js');
     b.transform(babelify.configure({
         compact: true,
     }));
@@ -75,7 +75,7 @@ gulp.task('build_js', () => {
             loadMaps: false,
         }))
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest(`./assets`))
+        .pipe(gulp.dest('./assets'))
         .pipe(filter('**/*.js'))
         .pipe(minify({
             mangle: {
