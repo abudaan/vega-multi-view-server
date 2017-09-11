@@ -1,3 +1,4 @@
 subscribe:
     signal: range
     as: detailDomain
+spec: spec6a

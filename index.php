@@ -12,34 +12,44 @@ $twig = new Twig_Environment($loader, array(
 ));
 
 use Symfony\Component\Yaml\Parser;
-
-$yaml = new Parser();
-$config = $yaml->parse(file_get_contents(__DIR__.'/config.yaml'));
+use Symfony\Component\Yaml\Dumper;
+$yamlParser = new Parser();
+$yamlDumper = new Dumper();
+$config = $yamlParser->parse(file_get_contents(__DIR__.'/config.yaml'));
 
 $app = new Silex\Application();
 
-$app->get('/{views}', function ($views) use ($app, $twig, $yaml, $config) {
+$app->get('/{views}', function ($views) use ($app, $twig, $yamlParser, $yamlDumper, $config) {
     $ids = explode('/', $views);
     $result = '';
     $i = 1;
     $specs = array();
     $runtimes = array();
 
+    $add = function ($specId, $runtime) use (&$specs, &$runtimes, $yamlParser, $config) {
+        $spec = file_get_contents(__DIR__.'/specs/spec'.$specId.'.yaml');
+        if ($spec != null) {
+            $spec = str_replace('$_DATA_PATH', $config['dataPath'], $spec);
+            $spec = str_replace('$_IMAGE_PATH', $config['imagePath'], $spec);
+            $specs[] = $yamlParser->parse($spec);
+            $runtimes[] = $runtime;
+            error_log($specId . ' > ' . sizeof($specs) . "\n", 3, __DIR__.'/php.log');
+        }
+    };
+
     foreach($ids as $id){
         if($id != '') {
-            $spec = file_get_contents(__DIR__.'/specs/spec'.$id.'.yaml');
-            if ($spec != null) {
-                $spec = str_replace('$_DATA_PATH', $config['dataPath'], $spec);
-                $spec = str_replace('$_IMAGE_PATH', $config['imagePath'], $spec);
-                $specs[] = $yaml->parse($spec);
-                // $specs[] = $spec;
+            if (file_exists(__DIR__.'/specs/runtime'.$id.'.yaml')) {
                 $runtime = file_get_contents(__DIR__.'/specs/runtime'.$id.'.yaml');
-                if ($runtime !== null) {
-                    $runtimes[] = $yaml->parse($runtime);
-                    // $runtimes[] = $runtime;
-                } else {
-                    $runtimes[] = null;
+                $runtime =  $yamlParser->parse($runtime);
+                $spec = $runtime['spec'];
+                if (isset($spec)) {
+                    $add($id, $runtime);
+                } else if (file_exists(__DIR__.'/specs/spec'.$id.'.yaml')) {
+                    $add($id, $runtime);
                 }
+            } else if (file_exists(__DIR__.'/specs/spec'.$id.'.yaml')) {
+                $add($id, null);
             }
         }
     }
@@ -48,6 +58,12 @@ $app->get('/{views}', function ($views) use ($app, $twig, $yaml, $config) {
     $config['runtimes'] = $runtimes;
     $config = json_encode($config);
     $config = str_replace('\'', '\"', $config); // to fix for instance: "span(brush) ? invert('xOverview', brush) : null"
+    // use bson if the spec has inlined data containing huge number, for instance topo,json data
+    // $config = MongoDB\BSON\fromPHP($config);
+    // $config = bin2hex($config);
+    // yaml is sometimes a bit smaller compared to json
+    // $config = $yamlDumper->dump($config, 1);
+    // return $config;
     return $twig->render('index.html', array('config' => $config));
 })
 ->assert('views', '.*');

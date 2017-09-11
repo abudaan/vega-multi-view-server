@@ -2,6 +2,7 @@
     "require": {
         "silex/silex": "~2.0",
         "twig/twig": "~2.0",
-        "symfony/yaml": "^3.3"
+        "symfony/yaml": "^3.3",
+        "mongodb/mongodb": "^1.1"
     }
 }
