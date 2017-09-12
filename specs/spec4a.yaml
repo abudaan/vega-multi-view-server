@@ -156,7 +156,7 @@ marks:
         text:
           signal: buurt_hover_naam
 encode: {}
-runtime:
+vmvConfig:
   publish:
     - signal: buurt_hover_naam
       as: hover
