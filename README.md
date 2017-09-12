@@ -113,6 +113,3 @@ You can play around with the [live example](http://app4.bigdator.nl). On the ser
 - `6b`: Range controller of 6a
 - `8a`: Scatter plot
 - `8b`: Range controller of 8a
-
-I will soon add more specs examples. And I will add another client that shows that is also very easy to load additional specs after the page has rendered.
-
