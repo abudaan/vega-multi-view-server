@@ -11,6 +11,7 @@
         "server": "php -S localhost:5005"
     },
     "dependencies": {
+        "pkginfo": "^0.4.1",
         "vega-multi-view": "https://github.com/abudaan/vega-multi-view"
     },
     "devDependencies": {

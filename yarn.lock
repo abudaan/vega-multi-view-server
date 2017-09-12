@@ -4330,6 +4330,10 @@ pkg-up@^1.0.0:
   dependencies:
     find-up "^1.0.0"
 
+pkginfo@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/pkginfo/-/pkginfo-0.4.1.tgz#b5418ef0439de5425fc4995042dced14fb2a84ff"
+
 pluralize@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-1.2.1.tgz#d1a21483fd22bb41e58a12fa3421823140897c45"
@@ -5436,7 +5440,7 @@ vega-dataflow@3:
     vega-loader "2"
     vega-util "1"
 
-"vega-datasets@github:vega/vega-datasets#gh-pages":
+vega-datasets@vega/vega-datasets#gh-pages:
   version "1.10.0"
   resolved "https://codeload.github.com/vega/vega-datasets/tar.gz/7080ba8297825d27495bdfb8386d10cff83cbacf"
 
@@ -5510,8 +5514,8 @@ vega-loader@2:
     vega-util "1"
 
 "vega-multi-view@https://github.com/abudaan/vega-multi-view":
-  version "1.0.6"
-  resolved "https://github.com/abudaan/vega-multi-view#36cce9150cdae242ba0d6272ea4b5b071ca99ee0"
+  version "1.0.7"
+  resolved "https://github.com/abudaan/vega-multi-view#c2d281c64f87d656abd77f30587c85037c685b72"
   dependencies:
     bson "^1.0.4"
     cson-parser "^2.0.0"
