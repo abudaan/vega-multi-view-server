@@ -15,7 +15,7 @@
 
 ## Introduction
 
-This project is a simple Silex server that serves pages with multiple separated Vega views. For rendering the views to the page I use [vega-multi-view](https://github.com/abudaan/vega-multi-view) which is a wrapper for the Vega runtime that allows separate Vega views to listen to each other's signals. Separate means that each spec is rendered in a separate HTML element. If you haven't already, it is recommended to read this [documentation](https://github.com/abudaan/vega-multi-view/README.md) first.
+This project is a simple Silex server that serves pages that contain multiple Vega views. For rendering the views to the page I use [vega-multi-view](https://github.com/abudaan/vega-multi-view) which is a wrapper for the Vega runtime that allows Vega views that live in separate HTML elements to listen to each other's signals. If you haven't already, it is recommended to read this [documentation](https://github.com/abudaan/vega-multi-view/README.md) first.
 
 For creating the Vega specifications (specs) I use tools from a related project: [vega-specs](https://github.com/abudaan/vega-specs).
 
@@ -71,7 +71,7 @@ The global configuration file that gets loaded as soon as the server starts, set
 
 ### Step 3
 
-The server builds a `vega-multi-view` global runtime configuration for the client and encodes it to a JSON string. The server renders a twig template and the serialized config object is added as dataset to the body element:
+The server builds a `vega-multi-view` global configuration for the client and encodes it to a JSON string. The server renders a twig template and the serialized config object is added as dataset to the body element:
 
 ```html
 <body data-vegamultiview='{"debug":true,"element":"app","dataPath":"\/assets\/data","imagePath":"\/assets\/img","specs ....}'>
@@ -99,15 +99,15 @@ createViews(data)
         console.log(result);
     });
 ```
-This way we don't need to load the runtime config via an extra HTTP call.
+This way we don't need to load the configuration via an extra HTTP call.
 
 ## Live example
 
 You can play around with the [live example](http://app4.bigdator.nl). On the server I have put a few test specs that I created in [this project](https://github.com/abudaan/vega-specs). You can choose one of the following ids to add to the url:
 
 - `4`: A plain Vega map without tiles
-- `4a`: Vega as Leaflet layer, this spec has its runtime inlined
-- `4b`: Same as 4a but with a separate runtime config
+- `4a`: Vega as Leaflet layer, this spec has its configuration inlined
+- `4b`: Same as 4a but with a separate configuration
 - `5a`: Webfont test
 - `6a`: Area chart
 - `6b`: Range controller of 6a
