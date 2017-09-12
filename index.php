@@ -24,15 +24,18 @@ $app->get('/{views}', function ($views) use ($app, $twig, $yamlParser, $yamlDump
     $result = '';
     $i = 1;
     $specs = array();
-    $runtimes = array();
 
-    $add = function ($specId, $runtime) use (&$specs, &$runtimes, $yamlParser, $config) {
+    $add = function ($specId, $runtime) use (&$specs, $yamlParser, $config) {
         $spec = file_get_contents(__DIR__.'/specs/spec'.$specId.'.yaml');
         if ($spec != null) {
             $spec = str_replace('$_DATA_PATH', $config['dataPath'], $spec);
             $spec = str_replace('$_IMAGE_PATH', $config['imagePath'], $spec);
-            $specs[] = $yamlParser->parse($spec);
-            $runtimes[] = $runtime;
+            $spec = $yamlParser->parse($spec);
+            if ($runtime == null) {
+                $specs[] = $spec;
+            } else {
+                $specs[] = array($spec, $runtime);
+            }
             error_log($specId . ' > ' . sizeof($specs) . "\n", 3, __DIR__.'/php.log');
         }
     };
@@ -55,7 +58,6 @@ $app->get('/{views}', function ($views) use ($app, $twig, $yamlParser, $yamlDump
     }
 
     $config['specs'] = $specs;
-    $config['runtimes'] = $runtimes;
     $config = json_encode($config);
     $config = str_replace('\'', '\"', $config); // to fix for instance: "span(brush) ? invert('xOverview', brush) : null"
     // use bson if the spec has inlined data containing huge number, for instance topo,json data

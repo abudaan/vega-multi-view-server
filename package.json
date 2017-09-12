@@ -11,7 +11,6 @@
         "server": "php -S localhost:5005"
     },
     "dependencies": {
-        "ramda": "0.23.0",
         "vega-multi-view": "https://github.com/abudaan/vega-multi-view"
     },
     "devDependencies": {

@@ -15,7 +15,7 @@
 
 ## Introduction
 
-This project is a simple Silex server that serves pages with multiple separated Vega views. For rendering the views to the page I use [vega-multi-view](https://github.com/abudaan/vega-multi-view) which is a wrapper for the Vega runtime that allows separate Vega views to listen to each other's signals. Separate means that each spec is rendered in a separate HTML element. It is recommended to read this [documentation](https://github.com/abudaan/vega-multi-view/README.md) first.
+This project is a simple Silex server that serves pages with multiple separated Vega views. For rendering the views to the page I use [vega-multi-view](https://github.com/abudaan/vega-multi-view) which is a wrapper for the Vega runtime that allows separate Vega views to listen to each other's signals. Separate means that each spec is rendered in a separate HTML element. If you haven't already, it is recommended to read this [documentation](https://github.com/abudaan/vega-multi-view/README.md) first.
 
 For creating the Vega specifications (specs) I use tools from a related project: [vega-specs](https://github.com/abudaan/vega-specs).
 
@@ -32,32 +32,17 @@ tells the server to load the Vega specs with id `6a` and `6b`. The order of the 
 
 ### Step 1
 
-The server first starts to look for a runtime configuration file that belongs the spec with the requested id. If no file is found the server continues to the next requested id.
+The server first starts to look for a view specific configuration that belongs the spec with the requested id.
 
-If a runtime file is found, the server looks for a `spec` entry. A runtime configuration may or may not define the spec it belongs to, if it does the server tries to find that spec and once the spec is found it will be coupled with the runtime.
+If this configuration is found, the server looks for a `spec` entry. A view specific configuration may or may not define the spec it belongs to, if it does the server tries to find that spec.
 
-If a spec is defined but it cannot be found, the server tries to find a spec with the requested id. If found it will be added with no coupled runtime. Note that this doesn't mean that the spec has no runtime configuration; it can be inlined in the spec file as well.
+If a spec is defined but it cannot be found, the server tries to find a spec with the requested id.
 
-Coupling means that the server populates 2 arrays: `$specs` and `$runtimes` and a spec at slot 2 of the `$specs` array is coupled to the runtime at slot 2 in the `$runtimes` array. If a spec has no runtime, `null` will be stored at the corresponding slot in the `$runtimes` array.
-
-```php
-// only the third spec has a coupled runtime configuration
-$specs = array (
-    $spec1,
-    $spec2,
-    $spec3
-);
-
-$runtimes = array(
-    null,
-    null,
-    $runtime3
-);
-```
+If no file is found the server continues to the next requested id.
 
 ### Step 2
 
-Now that the server has collected all specs and runtimes it loops over all specs to replace the paths to data sets and images. The spec files on the server are actually templates in YAML format and the paths in these specs are set like this:
+Now that the server has collected the specs it loops over them to replace the paths to data sets and images. The spec files on the server are actually templates in YAML format and the paths in these specs are set like this:
 
 ```yaml
 # data path
