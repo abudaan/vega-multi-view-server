@@ -1,4 +1,4 @@
-import createViews from 'vega-multi-view';
+import { addViews, removeViews } from 'vega-multi-view';
 
 // get the dataset from the body
 const config = document.body.dataset.vegamultiview;
@@ -12,9 +12,12 @@ try {
 }
 
 // create the views
-createViews(data)
+addViews(data)
     .then((result) => {
         // do other stuff
         console.log(result);
+        // setTimeout(() => {
+        //     removeViews(0, 1);
+        // }, 1000);
     });
 

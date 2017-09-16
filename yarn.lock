@@ -2418,6 +2418,14 @@ fast-levenshtein@~2.0.4:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
 
+"fetch-helpers@https://github.com/abudaan/fetch-helpers":
+  version "1.0.0"
+  resolved "https://github.com/abudaan/fetch-helpers#103cbf317c5c0fd22e5ac6d0c673ffec1667e3ef"
+  dependencies:
+    bson "^1.0.4"
+    cson-parser "^2.0.0"
+    yamljs "^0.3.0"
+
 figures@^1.3.5:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/figures/-/figures-1.7.0.tgz#cbe1e3affcf1cd44b80cadfed28dc793a9701d2e"
@@ -4330,10 +4338,6 @@ pkg-up@^1.0.0:
   dependencies:
     find-up "^1.0.0"
 
-pkginfo@^0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/pkginfo/-/pkginfo-0.4.1.tgz#b5418ef0439de5425fc4995042dced14fb2a84ff"
-
 pluralize@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-1.2.1.tgz#d1a21483fd22bb41e58a12fa3421823140897c45"
@@ -5425,6 +5429,14 @@ validate.io-undefined@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/validate.io-undefined/-/validate.io-undefined-1.0.3.tgz#7e27fcbb315b841e78243431897671929e20b7f4"
 
+"vega-as-leaflet-layer@https://github.com/abudaan/vega-as-leaflet-layer":
+  version "1.1.4"
+  resolved "https://github.com/abudaan/vega-as-leaflet-layer#531eec4d7bf6f388f672d9630651b76ed1db0e5b"
+  dependencies:
+    fetch-helpers "https://github.com/abudaan/fetch-helpers"
+    leaflet "^1.2.0"
+    vega "^3.0.2"
+
 vega-crossfilter@2:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/vega-crossfilter/-/vega-crossfilter-2.0.0.tgz#29a8d789add5a2d0f25a4cdedb16713bf4f39061"
@@ -5514,17 +5526,15 @@ vega-loader@2:
     vega-util "1"
 
 "vega-multi-view@https://github.com/abudaan/vega-multi-view":
-  version "1.0.7"
-  resolved "https://github.com/abudaan/vega-multi-view#c2d281c64f87d656abd77f30587c85037c685b72"
+  version "1.1.0"
+  resolved "https://github.com/abudaan/vega-multi-view#c863e2705a0604f679699570ed86164327c69877"
   dependencies:
-    bson "^1.0.4"
-    cson-parser "^2.0.0"
-    leaflet "^1.2.0"
+    fetch-helpers "https://github.com/abudaan/fetch-helpers"
     ramda "0.23.0"
     vega "^3.0.2"
+    vega-as-leaflet-layer "https://github.com/abudaan/vega-as-leaflet-layer"
     vega-tooltip "^0.4.3"
     xstream "^10.9.0"
-    yamljs "^0.3.0"
 
 vega-parser@2:
   version "2.1.2"

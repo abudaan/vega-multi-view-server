@@ -1,7 +1,7 @@
 {
-    "name": "vega-specs",
+    "name": "vega-multi-view-server",
     "version": "1.0.0",
-    "description": "wrestling with Vega3",
+    "description": "Silex server that creates vega-multi-view pages",
     "license": "MIT",
     "author": "abudaan",
     "scripts": {
@@ -11,7 +11,6 @@
         "server": "php -S localhost:5005"
     },
     "dependencies": {
-        "pkginfo": "^0.4.1",
         "vega-multi-view": "https://github.com/abudaan/vega-multi-view"
     },
     "devDependencies": {
