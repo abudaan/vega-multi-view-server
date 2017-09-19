@@ -22,7 +22,6 @@ $app = new Silex\Application();
 $app->get('/{views}', function ($views) use ($app, $twig, $yamlParser, $yamlDumper, $config) {
     $ids = explode('/', $views);
     $result = '';
-    $i = 1;
     $specs = array();
 
     $add = function ($specId, $runtime) use (&$specs, $yamlParser, $config) {
@@ -32,11 +31,11 @@ $app->get('/{views}', function ($views) use ($app, $twig, $yamlParser, $yamlDump
             $spec = str_replace('$_IMAGE_PATH', $config['imagePath'], $spec);
             $spec = $yamlParser->parse($spec);
             if ($runtime == null) {
-                $specs[] = $spec;
+                $specs[$specId] = $spec;
             } else {
-                $specs[] = array($spec, $runtime);
+                $specs[$specId] = array($spec, $runtime);
             }
-            error_log($specId . ' > ' . sizeof($specs) . "\n", 3, __DIR__.'/php.log');
+            // error_log($specId . ' > ' . sizeof($specs) . "\n", 3, __DIR__.'/php.log');
         }
     };
 

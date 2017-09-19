@@ -19,7 +19,7 @@ This project is a simple Silex server that serves pages that contain multiple Ve
 
 For creating the Vega specifications (specs) I use tools from a related project: [vega-specs](https://github.com/abudaan/vega-specs).
 
-Here is a [live example](http://app4.bigdator.nl/6a/6b/4b/8a/8b). The first spec listens to signals of the second spec, the third spec is stand-alone spec and the fourth spec listens to signals of the fifth spec.
+Here is a [live example](http://app4.bigdator.nl/6a/6b/4b/8a/8b). The first view listens to signals of the second view, the third view is stand-alone view and the fourth view listens to signals of the fifth view.
 
 
 ## How it works
@@ -38,7 +38,7 @@ If this configuration is found, the server looks for a `spec` entry. A view spec
 
 If a spec is defined but it cannot be found, the server tries to find a spec with the requested id.
 
-If no file is found the server continues to the next requested id.
+If no file is found the server continues to the next requested id or returns if it was the last id.
 
 ### Step 2
 
@@ -67,7 +67,7 @@ data:
           field: y
 ```
 
-The global configuration file that gets loaded as soon as the server starts, sets the data and image path parameters according the folder structure. This way it is very easy to reuse specs in different server environments. You could replace the paths on the client if necessary though I think this is more a task for the server.
+The global configuration file that the server loads as soon as it starts, sets the data and image path parameters according the folder structure. This way it is very easy to reuse specs in different server environments. You could replace the paths on the client if necessary though I think this is more a task for the server.
 
 ### Step 3
 
@@ -77,9 +77,9 @@ The server builds a `vega-multi-view` global configuration for the client and en
 <body data-vegamultiview='{"debug":true,"element":"app","dataPath":"\/assets\/data","imagePath":"\/assets\/img","specs ....}'>
 ```
 
-As soon as javascript starts on the client it queries the config from the body element, parses it back to JSON and loads it into `vega-multi-view`:
+As soon as javascript starts on the client it queries the config from the dataset of the body element, parses it back to JSON and loads it into `vega-multi-view`:
 ```javascript
-import createViews from 'vega-multi-view';
+import { addViews } from 'vega-multi-view';
 
 // get the dataset from the body
 const config = document.body.dataset.vegamultiview;
@@ -93,7 +93,7 @@ try {
 }
 
 // create the views
-createViews(data)
+addViews(data)
     .then((result) => {
         // do other stuff
         console.log(result);
