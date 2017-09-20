@@ -19,8 +19,7 @@ $config = $yamlParser->parse(file_get_contents(__DIR__.'/config.yaml'));
 
 $app = new Silex\Application();
 
-$app->get('/{views}', function ($views) use ($app, $twig, $yamlParser, $yamlDumper, $config) {
-    $ids = explode('/', $views);
+$getSpecs = function ($ids) use ($config, $yamlParser) {
     $result = '';
     $specs = array();
 
@@ -59,12 +58,36 @@ $app->get('/{views}', function ($views) use ($app, $twig, $yamlParser, $yamlDump
     $config['specs'] = $specs;
     $config = json_encode($config);
     $config = str_replace('\'', '\"', $config); // to fix for instance: "span(brush) ? invert('xOverview', brush) : null"
+    return $config;
+
     // use bson if the spec has inlined data containing huge number, for instance topo,json data
     // $config = MongoDB\BSON\fromPHP($config);
     // $config = bin2hex($config);
     // yaml is sometimes a bit smaller compared to json
     // $config = $yamlDumper->dump($config, 1);
     // return $config;
+};
+
+// statically serve spec
+$app->get('/specs/{file}', function ($file) use ($app) {
+    $file = __DIR__.'/specs/'.$file;
+    $stream = function () use ($file) {
+        readfile($file);
+    };
+    $contentType = 'application/json';
+    return $app->stream($stream, 200, array('Content-Type' => $contentType));
+});
+
+$app->get('/json/{views}', function ($views) use ($app, $twig, $getSpecs) {
+    $ids = explode('/', $views);
+    $config = $getSpecs($ids);
+    return $config;
+})
+->assert('views', '.*');
+
+$app->get('/{views}', function ($views) use ($app, $twig, $getSpecs) {
+    $ids = explode('/', $views);
+    $config = $getSpecs($ids);
     return $twig->render('index.html', array('config' => $config));
 })
 ->assert('views', '.*');

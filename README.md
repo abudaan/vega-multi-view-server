@@ -113,3 +113,8 @@ You can play around with the [live example](http://app4.bigdator.nl). On the ser
 - `6b`: Range controller of 6a
 - `8a`: Scatter plot
 - `8b`: Range controller of 8a
+
+
+### Live example with REST API call
+
+This [example](http://app4.bigdator.nl/example2/) gets the Vega views by making a REST API call to the server.
