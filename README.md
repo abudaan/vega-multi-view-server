@@ -9,7 +9,11 @@
          * [Step 1](#step-1)
          * [Step 2](#step-2)
          * [Step 3](#step-3)
-      * [Live example](#live-example)
+            * [Twig template](#twig-template)
+            * [JSON string](#json-string)
+               * [Example #1](#example-1)
+               * [Example #2](#example-2)
+      * [Specs for the live examples](#specs-for-the-live-examples)
 
 <small>(toc created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc))</small>
 
@@ -206,7 +210,7 @@ This is example uses a hard-coded API call url. If you want more flexibility, yo
 
 Live example [here](http://app4.bigdator.nl/rest/#4a/4b), you can pass any id listed below. Don't forget the # in the url! You can use cleaner urls if you use the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History) but that is beyond the scope of this example.
 
-## Live examples
+## Specs for the live examples
 
 You can use a few test specs when playing around with the live examples. I have created these specs in [this project](https://github.com/abudaan/vega-specs). You can choose one of the following ids to add to the url:
 
