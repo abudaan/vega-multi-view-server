@@ -5,8 +5,8 @@
     <title>vega</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/abudaan/vega-multi-view/v1.1.2/browser/vmv.css" />
-    <script src="https://cdn.rawgit.com/abudaan/vega-multi-view/v1.1.2/browser/vmv.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/abudaan/vega-multi-view/v1.1.3/browser/vmv.css" />
+    <script src="https://cdn.rawgit.com/abudaan/vega-multi-view/v1.1.3/browser/vmv.js"></script>
 </head>
 
 <body>
@@ -15,8 +15,8 @@
         // vega-multi-view is available via the global variable vmv
         var addViews = window.vmv.addViews;
 
-        // set a fallback rest api url
-        var restApiUrl = '/json/6a/6b';
+        // empty rest api url, nothing will be rendered
+        var restApiUrl = '';
 
         // get the url from the hash
         var hash = location.hash.substring(1);

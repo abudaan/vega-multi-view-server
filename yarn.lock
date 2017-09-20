@@ -5526,8 +5526,8 @@ vega-loader@2:
     vega-util "1"
 
 "vega-multi-view@https://github.com/abudaan/vega-multi-view":
-  version "1.1.1"
-  resolved "https://github.com/abudaan/vega-multi-view#51e965fa2fef949cf5704786233a3140587cd9fb"
+  version "1.1.2"
+  resolved "https://github.com/abudaan/vega-multi-view#9d196c81a0d65d51bdf8dc8611ceee4ad7bc0296"
   dependencies:
     fetch-helpers "https://github.com/abudaan/fetch-helpers"
     ramda "0.23.0"

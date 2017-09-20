@@ -2,4 +2,11 @@ debug: true
 element: app
 dataPath: /assets/data
 imagePath: /assets/img
-#cssClass: view
+styling:
+    css: 'html, body {
+        color: white;
+        background-color: #333;
+        padding: 0;
+        margin: 0;
+    }'
+    addToHead: true

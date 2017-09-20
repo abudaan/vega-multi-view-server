@@ -1,7 +1,7 @@
 import { addViews, removeViews } from 'vega-multi-view';
 
 // get the dataset from the body
-const config = document.body.dataset.vegamultiview;
+const config = document.body.dataset.vmv;
 
 // try to parse it to javascript
 let data;
