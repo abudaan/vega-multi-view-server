@@ -134,7 +134,7 @@ You can process the JSON string to your liking. Here are 2 examples of making an
 
 <body>
     <div id="container"></div>
-    <script>
+    <script> // es5
         // vega-multi-view is available via the global variable vmv
         var addViews = window.vmv.addViews;
 
@@ -174,7 +174,7 @@ This is example uses a hard-coded API call url. If you want more flexibility, yo
 
 <body>
     <div id="container"></div>
-    <script>
+    <script> // es5
         // vega-multi-view is available via the global variable vmv
         var addViews = window.vmv.addViews;
 
