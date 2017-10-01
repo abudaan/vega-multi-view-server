@@ -1,5 +1,6 @@
-import { addViews, removeViews } from 'vega-multi-view';
+import { addViews, removeViews, version } from 'vega-multi-view';
 
+console.log(version);
 // get the dataset from the body
 const config = document.body.dataset.vmv;
 
